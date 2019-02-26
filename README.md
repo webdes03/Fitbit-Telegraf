@@ -1,0 +1,1 @@
+Please refer to https://mike-greene.com/blog/2019/1/21/analyzing-fitbit-data-with-telegraf-grafana for full usage details.

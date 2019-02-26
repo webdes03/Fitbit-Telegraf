@@ -1,0 +1,182 @@
+{
+  "aliasColors": {},
+  "bars": true,
+  "dashLength": 10,
+  "dashes": false,
+  "datasource": "Fitbit",
+  "fill": 1,
+  "gridPos": {
+    "h": 6,
+    "w": 6,
+    "x": 12,
+    "y": 10
+  },
+  "id": 50,
+  "legend": {
+    "alignAsTable": false,
+    "avg": false,
+    "current": false,
+    "max": false,
+    "min": false,
+    "show": true,
+    "total": false,
+    "values": false
+  },
+  "lines": false,
+  "linewidth": 1,
+  "links": [],
+  "nullPointMode": "null",
+  "percentage": false,
+  "pointradius": 5,
+  "points": false,
+  "renderer": "flot",
+  "seriesOverrides": [
+    {
+      "alias": "Active Minutes",
+      "bars": false,
+      "color": "#e0f9d7",
+      "fill": 0,
+      "lines": true,
+      "linewidth": 2,
+      "nullPointMode": "null",
+      "steppedLine": false,
+      "yaxis": 2
+    },
+    {
+      "alias": "Steps",
+      "color": "rgb(80, 134, 66)"
+    }
+  ],
+  "spaceLength": 10,
+  "stack": false,
+  "steppedLine": false,
+  "targets": [
+    {
+      "alias": "Steps",
+      "groupBy": [
+        {
+          "params": [
+            "24h"
+          ],
+          "type": "time"
+        },
+        {
+          "params": [
+            "none"
+          ],
+          "type": "fill"
+        }
+      ],
+      "measurement": "activity",
+      "orderByTime": "ASC",
+      "policy": "default",
+      "refId": "A",
+      "resultFormat": "time_series",
+      "select": [
+        [
+          {
+            "params": [
+              "steps"
+            ],
+            "type": "field"
+          },
+          {
+            "params": [],
+            "type": "max"
+          }
+        ]
+      ],
+      "tags": []
+    },
+    {
+      "alias": "Active Minutes",
+      "groupBy": [
+        {
+          "params": [
+            "$__interval"
+          ],
+          "type": "time"
+        },
+        {
+          "params": [
+            "0"
+          ],
+          "type": "fill"
+        }
+      ],
+      "hide": false,
+      "measurement": "activity",
+      "orderByTime": "ASC",
+      "policy": "default",
+      "query": "SELECT max(\"minutesFairlyActive\") + max(\"minutesVeryActive\") + max(\"minutesLightlyActive\") FROM \"activity\" WHERE $timeFilter GROUP BY time(24h) fill(none)",
+      "rawQuery": true,
+      "refId": "B",
+      "resultFormat": "time_series",
+      "select": [
+        [
+          {
+            "params": [
+              "minutesFairlyActive"
+            ],
+            "type": "field"
+          },
+          {
+            "params": [],
+            "type": "max"
+          }
+        ]
+      ],
+      "tags": []
+    }
+  ],
+  "thresholds": [
+    {
+      "colorMode": "ok",
+      "fill": true,
+      "line": false,
+      "op": "gt",
+      "value": 7500,
+      "yaxis": "left"
+    }
+  ],
+  "timeFrom": "7d",
+  "timeRegions": [],
+  "timeShift": null,
+  "title": "FITBIT STEPS PER DAY",
+  "tooltip": {
+    "shared": true,
+    "sort": 0,
+    "value_type": "individual"
+  },
+  "transparent": true,
+  "type": "graph",
+  "xaxis": {
+    "buckets": null,
+    "mode": "time",
+    "name": null,
+    "show": true,
+    "values": []
+  },
+  "yaxes": [
+    {
+      "format": "short",
+      "label": null,
+      "logBase": 1,
+      "max": null,
+      "min": null,
+      "show": true
+    },
+    {
+      "format": "m",
+      "label": null,
+      "logBase": 1,
+      "max": null,
+      "min": "0",
+      "show": true
+    }
+  ],
+  "yaxis": {
+    "align": false,
+    "alignLevel": null
+  }
+}
